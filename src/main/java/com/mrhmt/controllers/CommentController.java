@@ -9,6 +9,7 @@ import java.util.Map;
 import com.mrhmt.model.Comment;
 import com.mrhmt.model.CommentRepository;
 
+@CrossOrigin(origins = "https://mrhmt.com", maxAge = 3600)
 @RestController
 public class CommentController {
     @Autowired
