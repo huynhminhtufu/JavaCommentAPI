@@ -1,9 +1,13 @@
-package com.mrhmt;
+package com.mrhmt.model;
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 @Entity
 public class Comment {
@@ -16,6 +20,8 @@ public class Comment {
     private String content;
     private String name;
     private String email;
+    private Date createdAt;
+    private Date updatedAt;
 
     public Comment() {
     }
@@ -35,6 +41,16 @@ public class Comment {
         this.content = content;
         this.name = name;
         this.email = email;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = new Date();
     }
 
     public int getId() {
@@ -85,15 +101,17 @@ public class Comment {
         this.email = email;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
     @Override
     public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", domain='" + domain + '\'' +
-                ", path='" + path + '\'' +
-                ", content='" + content + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return "Comment{" + "id=" + id + ", domain='" + domain + '\'' + ", path='" + path + '\'' + ", content='"
+                + content + '\'' + ", name='" + name + '\'' + ", email='" + email + '\'' + '}';
     }
 }
